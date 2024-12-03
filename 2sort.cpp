@@ -191,32 +191,9 @@ void measure_sorting_time() {
     free(temp_array);
 }
 
-void measure_sorting_qstime() {
-    int count = 5000; // Размер массива
-    int* mixed_array = (int*)malloc(count * sizeof(int));
-
-    // Генерация массивов
-    generate_mixed_array(mixed_array, count);
-
-    int* temp_array = (int*)malloc(count * sizeof(int));
-
-    // Измерение времени работы быстрой сортировки на смешанном массиве
-    memcpy(temp_array, mixed_array, count * sizeof(int)); // Копируем массив
-    clock_t start_qs_mixed = clock();
-    qs(temp_array, 0, count - 1);
-    clock_t end_qs_mixed = clock();
-    double time_qs_mixed = (double)(end_qs_mixed - start_qs_mixed) / CLOCKS_PER_SEC;
-    printf("\nВремя выполнения быстрой сортировки на смешанном массиве (5000 элементов): %.6f секунд\n", time_qs_mixed);
-
-    // Освобождение памяти
-    free(mixed_array);
-    free(temp_array);
-}
-
 int main() {
     setlocale(LC_ALL, "Rus");
     srand(time(NULL)); // Инициализация генератора случайных чисел
     measure_sorting_time(); // Запуск измерения времени сортировок
-    measure_sorting_qstime();
     return 0;
 }
